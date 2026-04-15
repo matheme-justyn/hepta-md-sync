@@ -32,6 +32,8 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+_tmp_db_path = None
+
 # 讀取環境變數（支援 .env 檔案）
 def load_env():
     env_file = Path(__file__).parent / ".env"
@@ -94,18 +96,22 @@ def open_db_copy() -> sqlite3.Connection:
             shutil.copy2(src_ext, Path(str(tmp_path) + ext))
     conn = sqlite3.connect(f"file:{tmp_path}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
-    conn._tmp_path = tmp_path
+    global _tmp_db_path
+    _tmp_db_path = tmp_path
     return conn
 
 
 def close_db(conn):
+    global _tmp_db_path
     conn.close()
-    try:
-        Path(conn._tmp_path).unlink(missing_ok=True)
-        for ext in ("-wal", "-shm"):
-            Path(str(conn._tmp_path) + ext).unlink(missing_ok=True)
-    except Exception:
-        pass
+    if _tmp_db_path:
+        try:
+            Path(_tmp_db_path).unlink(missing_ok=True)
+            for ext in ("-wal", "-shm"):
+                Path(str(_tmp_db_path) + ext).unlink(missing_ok=True)
+        except Exception:
+            pass
+        _tmp_db_path = None
 
 
 def build_card_wb_map(conn):
