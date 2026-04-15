@@ -1,0 +1,31 @@
+# 環境變數檔案 (包含機敏資訊)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 系統檔案
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# 狀態檔 (選擇性排除，若想版本控制可移除此行)
+# .heptabase_sync_state.json
