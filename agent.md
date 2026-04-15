@@ -77,6 +77,48 @@ pdf_card_instance(pdf_card_id, whiteboard_id, ...)
 
 - 衝突偵測
 
+## Git Commit 規範
+
+### Commit Message 格式
+
+**標題**：使用 Angular Conventional Commits style
+```
+<type>: <簡短描述>
+```
+
+**內文**：中文列點說明
+```
+- 具體變更項目 1
+- 具體變更項目 2
+- 具體變更項目 3
+```
+
+### Type 類型
+- `feat`: 新功能
+- `fix`: 修復問題
+- `docs`: 文件更新
+- `style`: 格式調整（不影響程式碼運作）
+- `refactor`: 重構（不改變功能）
+- `test`: 測試相關
+- `chore`: 建置流程、輔助工具、依賴更新
+
+### 範例
+```
+feat: add PDF content extraction
+
+- 新增 PDF 文字內容提取功能
+- 支援 OCR 辨識掃描文件
+- 更新文件說明 PDF 處理流程
+```
+
+```
+fix: resolve encoding error in journal sync
+
+- 修正 journal 內容編碼問題
+- 處理特殊字元轉義
+- 新增編碼錯誤處理機制
+```
+
 ## 檔案位置
 
 `~/Dropbox/6_digital/hepta-md-sync/`
